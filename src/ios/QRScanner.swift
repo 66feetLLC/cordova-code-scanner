@@ -103,7 +103,7 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
                 metaOutput = AVCaptureMetadataOutput()
                 captureSession!.addOutput(metaOutput)
                 metaOutput!.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
-                metaOutput!.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+                metaOutput!.metadataObjectTypes = [AVMetadataObjectTypeQRCode, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode128Code, AVMetadataObjectTypeDataMatrixCode]
                 captureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
                 captureVideoPreviewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
                 captureVideoPreviewLayer!.frame = cameraView.bounds
@@ -190,7 +190,7 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
             return
         }
         let found = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-        if found.type == AVMetadataObjectTypeQRCode && found.stringValue != nil {
+        if found.stringValue != nil {
             scanning = false
             let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: found.stringValue)
             commandDelegate!.sendPluginResult(pluginResult, callbackId: nextScanningCommand?.callbackId!)

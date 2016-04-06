@@ -1,6 +1,6 @@
-[![npm](https://img.shields.io/npm/v/cordova-plugin-qrscanner.svg)](https://www.npmjs.com/package/cordova-plugin-qrscanner) [![npm](https://img.shields.io/npm/dm/cordova-plugin-qrscanner.svg)](https://www.npmjs.com/package/cordova-plugin-qrscanner)
+[![npm](https://img.shields.io/npm/v/cordova-code-scanner.svg)](https://www.npmjs.com/package/cordova-code-scanner) [![npm](https://img.shields.io/npm/dm/cordova-code-scanner.svg)](https://www.npmjs.com/package/cordova-code-scanner)
 
-# cordova-plugin-qrscanner
+# cordova-code-scanner
 A fast, energy efficient, highly-configurable QR code scanner for Cordova apps. Currently iOS only.
 
 QRScanner's live video preview is rendered behind the Cordova app's native webview, and the native webview's background is made transparent. This allows for an interface to be built inside the webview to control the scanner.
@@ -8,14 +8,14 @@ QRScanner's live video preview is rendered behind the Cordova app's native webvi
 ## Get Started
 
 ```bash
-cordova plugin add cordova-plugin-qrscanner
+cordova plugin add cordova-code-scanner
 ```
 
 The iOS component of the plugin is written in Swift 2. To enable it, add the following hook to the iOS platform in your Cordova app's `config.xml`:
 
 ```xml
 <platform name="ios">
-    <hook type="after_platform_add" src="plugins/cordova-plugin-qrscanner/scripts/swift-support.js" />
+    <hook type="after_platform_add" src="plugins/cordova-code-scanner/scripts/swift-support.js" />
 </platform>
 ```
 
@@ -60,7 +60,7 @@ function displayContents(text){
 
 Because Cordova is written in Objective-C, Cordova plugins written in Swift [require a `bridging header` to interact with Cordova](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html).
 
-A project can only have one bridging header. If your app uses plugins other than `cordova-plugin-qrscanner` which are also written in Swift, you will need to create a master bridging header to import each. Create a new bridging header and import each of the plugins' bridging headers, for example:
+A project can only have one bridging header. If your app uses plugins other than `cordova-code-scanner` which are also written in Swift, you will need to create a master bridging header to import each. Create a new bridging header and import each of the plugins' bridging headers, for example:
 
 ```c
 //  MyProject-Bridging-Header.h
@@ -72,10 +72,10 @@ A project can only have one bridging header. If your app uses plugins other than
 //com.eface2face.iosrtc
 #import "iosrtc-Bridging-Header.h"
 
-//cordova-plugin-qrscanner
+//cordova-code-scanner
 #import "QRScanner-Bridging-Header.h"
 ```
-Copy the script from `cordova-plugin-qrscanner/scripts/swift-support.js` into your project (eg. into the `hooks` folder), and modify the `BRIDGING_HEADER_END` variable to point to your new bridging header. Finally, remove and re-add the ios platform to trigger the hook. See [this issue](https://github.com/eface2face/cordova-plugin-iosrtc/issues/9) for more information.
+Copy the script from `cordova-code-scanner/scripts/swift-support.js` into your project (eg. into the `hooks` folder), and modify the `BRIDGING_HEADER_END` variable to point to your new bridging header. Finally, remove and re-add the ios platform to trigger the hook. See [this issue](https://github.com/eface2face/cordova-plugin-iosrtc/issues/9) for more information.
 
 ## API
 With the exception of `QRScanner.scan()`, all callbacks are optional.
@@ -300,9 +300,9 @@ Code | Name                        | Description
    8 | `OPEN_SETTINGS_UNAVAILABLE` | The device is unable to open settings.
 
 ## Typescript
-Type definitions for cordova-plugin-qrscanner are [available in the DefinitelyTyped project](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/cordova-plugin-qrscanner/cordova-plugin-qrscanner.d.ts).
+Type definitions for cordova-code-scanner are [available in the DefinitelyTyped project](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/cordova-code-scanner/cordova-code-scanner.d.ts).
 
 ## Contributing &amp; Testing
-To setup the tests, run `npm test`. This will create a new cordova project in the same directory as this repo, install cordova-plugin-qrscanner, and configure the [Cordova Plugin Test Framework](https://github.com/apache/cordova-plugin-test-framework).
+To setup the tests, run `npm test`. This will create a new cordova project in the same directory as this repo, install cordova-code-scanner, and configure the [Cordova Plugin Test Framework](https://github.com/apache/cordova-plugin-test-framework).
 
 Both Automatic Tests (via Cordova Plugin Test Framework's built-in [Jasmine](https://github.com/jasmine/jasmine)) and Manual Tests are available. Automatic tests confirm the existence and expected structure of the javascript API, and manual tests should be used to confirm functionality on each platform.

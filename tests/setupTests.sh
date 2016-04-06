@@ -1,5 +1,5 @@
 # this script creates a test cordovaTests directory as a sibling of the
-# cordova-plugin-qrscanner directory
+# cordova-code-scanner directory
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 
@@ -9,14 +9,14 @@ rm -r QRScannerTests/
 cordova create QRScannerTests
 cd QRScannerTests/
 TESTS_DIR=`pwd`
-cordova plugin add ../../cordova-plugin-qrscanner
-cordova plugin add ../../cordova-plugin-qrscanner/tests
+cordova plugin add ../../cordova-code-scanner
+cordova plugin add ../../cordova-code-scanner/tests
 cordova plugin add cordova-plugin-test-framework
 
 # timestamp the bundle ID so permissions are reset each build
 TIMESTAMP="`date +%s`"; sed "s/io\.cordova\.hellocordova/test\.qrscanner\.$TIMESTAMP/" config.xml > config.xml.tmp
 sed 's/index\.html/cdvtests\/index\.html/' config.xml.tmp > config.xml.tmp2
-sed 's/<platform name="ios">/<platform name="ios"><hook type="after_platform_add" src="plugins\/cordova-plugin-qrscanner\/scripts\/swift-support\.js" \/>/' config.xml.tmp2 > config.xml
+sed 's/<platform name="ios">/<platform name="ios"><hook type="after_platform_add" src="plugins\/cordova-code-scanner\/scripts\/swift-support\.js" \/>/' config.xml.tmp2 > config.xml
 rm config.xml.tmp config.xml.tmp2
 
 cordova platform add ios
@@ -26,7 +26,7 @@ echo ''
 echo ''
 echo '-------------'
 echo ''
-echo 'The cordovaPluginTests directory is a sibling of cordova-plugin-qrscanner.'
+echo 'The cordovaPluginTests directory is a sibling of cordova-code-scanner.'
 echo '$ cd '$TESTS_DIR
 echo ''
 echo 'Run tests on connected device: $ cordova run ios --device'

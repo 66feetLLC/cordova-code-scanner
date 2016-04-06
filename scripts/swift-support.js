@@ -6,7 +6,7 @@
 //
 // Usage in cordova project config.xml:
 // <platform name="ios">
-//    <hook type="after_platform_add" src="plugins/cordova-plugin-qrscanner/scripts/swift-support.js" />
+//    <hook type="after_platform_add" src="plugins/cordova-code-scanner/scripts/swift-support.js" />
 // </platform>
 
 var
@@ -20,7 +20,7 @@ var
 	RUNPATH_SEARCH_PATHS_XCODE = '"' + RUNPATH_SEARCH_PATHS + '"',
 	ENABLE_BITCODE = 'NO',
 	ENABLE_BITCODE_XCODE = '"' + ENABLE_BITCODE + '"',
-	BRIDGING_HEADER_END = '/Plugins/cordova-plugin-qrscanner/QRScanner-Bridging-Header.h',
+	BRIDGING_HEADER_END = '/Plugins/cordova-code-scanner/QRScanner-Bridging-Header.h',
 	COMMENT_KEY = /_comment$/;
 
 
@@ -73,7 +73,7 @@ module.exports = function (context) {
 		swiftOptions = [''], // <-- begin to file appending AFTER initial newline
 		xcodeProject;
 
-	debug('Enabling Swift for cordova-plugin-qrscanner.');
+	debug('Enabling Swift for cordova-code-scanner.');
 
 	// Checking if the project files are in the right place
 	if (!fs.existsSync(xcodeProjectPath)) {
