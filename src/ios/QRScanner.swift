@@ -192,6 +192,7 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
         let found = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
         if found.stringValue != nil {
             scanning = false
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: found.stringValue)
             commandDelegate!.sendPluginResult(pluginResult, callbackId: nextScanningCommand?.callbackId!)
             nextScanningCommand = nil
