@@ -103,7 +103,10 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
                 metaOutput = AVCaptureMetadataOutput()
                 captureSession!.addOutput(metaOutput)
                 metaOutput!.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
-                metaOutput!.metadataObjectTypes = [AVMetadataObjectTypeQRCode, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode128Code, AVMetadataObjectTypeDataMatrixCode]
+                metaOutput!.metadataObjectTypes = [AVMetadataObjectTypeQRCode,
+                                                   AVMetadataObjectTypeCode39Code,
+                                                   AVMetadataObjectTypeCode128Code,
+                                                   AVMetadataObjectTypeDataMatrixCode]
                 captureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
                 captureVideoPreviewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
                 captureVideoPreviewLayer!.frame = cameraView.bounds
@@ -192,8 +195,9 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
         let found = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
         if found.stringValue != nil {
             scanning = false
+            let scanResult: [NSObject : AnyObject] = ["metatype": found.type, "scanString": found.stringValue]
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsString: found.stringValue)
+            let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsDictionary: scanResult)
             commandDelegate!.sendPluginResult(pluginResult, callbackId: nextScanningCommand?.callbackId!)
             nextScanningCommand = nil
         }
